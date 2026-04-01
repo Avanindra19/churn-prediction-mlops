@@ -9,20 +9,23 @@ A production-style ML pipeline that predicts B2B customer churn,
 explains predictions using the Claude AI API, and surfaces
 actionable retention recommendations to customer success teams.
 
+Built entirely on cloud platforms — no local installs.
+
 ## Architecture
-[architecture diagram]
+[architecture diagram — added Day 15]
 
 ## Tech Stack
-| Layer             | Tool                        |
-|-------------------|-----------------------------|
-| Data + compute    | Kaggle Notebooks            |
-| SQL features      | Python sqlite3              |
-| ML model          | XGBoost + scikit-learn      |
-| Experiment tracking | MLflow on DagsHub         |
-| AI explanations   | Claude API (Anthropic)      |
-| Orchestration     | GitHub Actions              |
-| Dashboard         | Streamlit Community Cloud   |
-| Version control   | GitHub                      |
+| Layer                | Tool                        |
+|----------------------|-----------------------------|
+| Data warehouse       | Google BigQuery             |
+| SQL feature engineering | dbt Cloud               |
+| Data + compute       | Kaggle Notebooks            |
+| ML model             | XGBoost + scikit-learn      |
+| Experiment tracking  | MLflow on DagsHub           |
+| AI explanations      | Claude API (Anthropic)      |
+| Orchestration        | GitHub Actions              |
+| Dashboard            | Streamlit Community Cloud   |
+| Version control      | GitHub                      |
 
 ## Results
 | Metric       | Score  |
@@ -32,20 +35,28 @@ actionable retention recommendations to customer success teams.
 | Recall       | TBD    |
 
 ## Live Demo
-[Streamlit dashboard link]
+[Streamlit dashboard link — added Day 14]
 
 ## MLflow Experiments
-[DagsHub link]
+[DagsHub link — added Day 5]
 
 ## Project Structure
-notebooks/   — Kaggle notebooks by phase (01, 02, 03)
-src/         — Reusable Python scripts
-app/         — Streamlit dashboard
-outputs/     — Sample model outputs and charts
-.github/     — GitHub Actions workflow
+```
+churn-prediction-mlops/
+├── notebooks/        # Kaggle notebooks by phase (01, 02, 03)
+├── dbt/              # dbt models, tests, documentation
+│   ├── models/
+│   │   ├── staging/      # Raw source cleaning
+│   │   └── features/     # Engineered feature tables
+│   └── schema.yml
+├── src/              # Reusable Python scripts
+├── app/              # Streamlit dashboard
+├── outputs/          # Sample model outputs and charts
+└── .github/          # GitHub Actions workflow
+```
 
 ## How to Run
-
+[Added Day 12 after orchestration is complete]
 
 ## Author
 Avanindra19 · github.com/Avanindra19
