@@ -1,0 +1,56 @@
+version: 2
+
+sources:
+  - name: churn_raw
+    database: churn-mlops
+    schema: churn_raw
+    description: "Raw Telco customer data loaded from Kaggle"
+    tables:
+      - name: telco_customers
+        description: "One row per B2B customer account"
+        columns:
+          - name: customerid
+            description: "Unique account identifier"
+            tests:
+              - unique
+              - not_null
+          - name: churn
+            description: "Whether account churned — Yes or No"
+            tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ['Yes', 'No']
+          - name: monthlycharges
+            description: "Current monthly billing amount in USD"
+            tests:
+              - not_null
+          - name: tenure
+            description: "Months since account opened"
+            tests:
+              - not_null
+          - name: contract
+            description: "Contract type"
+            tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ['Month-to-month', 'One year', 'Two year']
+
+models:
+  - name: stg_customers
+    description: "Cleaned and typed customer records — one row per account"
+    columns:
+      - name: customer_id
+        description: "Unique account identifier"
+        tests:
+          - unique
+          - not_null
+      - name: churn_flag
+        description: "1 if churned, 0 if retained"
+        tests:
+          - not_null
+      - name: monthly_charges
+        description: "Monthly billing amount in USD"
+        tests:
+          - not_null
